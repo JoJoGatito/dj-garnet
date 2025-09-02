@@ -1,0 +1,23 @@
+{
+  "functions": {
+    "api/**/*.ts": {
+      "runtime": "@vercel/node"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/requests",
+      "destination": "/api/requests/index"
+    },
+    {
+      "source": "/api/requests/(.*)/status",
+      "destination": "/api/requests/[id]/status"
+    },
+    {
+      "source": "/api/feedback",
+      "destination": "/api/feedback/index"
+    }
+  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/public"
+}
