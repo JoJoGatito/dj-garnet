@@ -57,13 +57,10 @@ async function runMigrations() {
 
       // Run migration inside transaction
       try {
-        await sql.begin(async (tx) => {
-          // Apply the migration SQL
-          await tx.execute(migrationSQL);
-
-          // Record that this migration was applied
-          await tx`INSERT INTO migrations (name) VALUES (${file});`;
-        });
+        await sql.transaction([
+          sql`${migrationSQL}`,
+          sql`INSERT INTO migrations (name) VALUES (${file});`,
+        ]);
 
         appliedNow.push(file);
         console.log(`✅ Successfully applied: ${file}`);
