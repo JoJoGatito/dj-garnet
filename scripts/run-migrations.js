@@ -58,9 +58,13 @@ async function runMigrations() {
 
       // Run migration inside transaction
       try {
+        // Execute each statement using the direct function call approach
+        // as shown in the Neon documentation
         for (const statement of statements) {
-          await sql.unsafe(statement);
+          await sql(statement);
         }
+        
+        // For parameterized queries, we can still use the tagged template literal
         await sql`INSERT INTO migrations (name) VALUES (${file});`;
 
         appliedNow.push(file);
