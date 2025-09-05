@@ -58,7 +58,7 @@ async function runMigrations() {
       // Run migration inside transaction
       try {
         await sql.transaction([
-          sql`${migrationSQL}`,
+          sql.raw(migrationSQL),
           sql`INSERT INTO migrations (name) VALUES (${file});`,
         ]);
 
