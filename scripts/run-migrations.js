@@ -59,7 +59,7 @@ async function runMigrations() {
       // Run migration inside transaction
       try {
         for (const statement of statements) {
-          await sql`${statement}`;
+          await sql.unsafe(statement);
         }
         await sql`INSERT INTO migrations (name) VALUES (${file});`;
 
