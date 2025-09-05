@@ -61,7 +61,17 @@ async function runMigrations() {
         // Execute each statement using the direct function call approach
         // as shown in the Neon documentation
         for (const statement of statements) {
-          await sql(statement);
+          try {
+            await sql(statement);
+          } catch (error) {
+            // Check if this is a "relation already exists" error (code 42P07)
+            if (error.code === '42P07') {
+              console.log(`⚠️ Table already exists, continuing: ${error.message}`);
+            } else {
+              // For any other error, re-throw it
+              throw error;
+            }
+          }
         }
         
         // For parameterized queries, we can still use the tagged template literal
