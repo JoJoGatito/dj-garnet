@@ -54,13 +54,14 @@ async function runMigrations() {
 
       const migrationPath = path.join(migrationsDir, file);
       const migrationSQL = await fs.readFile(migrationPath, 'utf8');
+      const statements = migrationSQL.split('--> statement-breakpoint').map(s => s.trim()).filter(Boolean);
 
       // Run migration inside transaction
       try {
-        await sql.transaction([
-          sql.raw(migrationSQL),
-          sql`INSERT INTO migrations (name) VALUES (${file});`,
-        ]);
+        for (const statement of statements) {
+          await sql`${statement}`;
+        }
+        await sql`INSERT INTO migrations (name) VALUES (${file});`;
 
         appliedNow.push(file);
         console.log(`✅ Successfully applied: ${file}`);
