@@ -13,5 +13,10 @@
   to = "/.netlify/functions/status"
   status = 200
 
+[[redirects]]
+  from = "/api/feedback"
+  to = "/.netlify/functions/feedback"
+  status = 200
+
 [build.environment]
   NODE_VERSION = "18"
