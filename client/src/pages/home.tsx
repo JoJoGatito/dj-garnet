@@ -117,7 +117,7 @@ export default function Home() {
             </Link>
             <Link href="/">
               <button 
-                className="text-sm text-primary hover:text-primary transition-colors duration-200 focus:outline-none"
+                className="text-sm text-primary-foreground hover:text-primary-foreground transition-colors duration-200 focus:outline-none"
                 data-testid="nav-home">
                 Home
               </button>
