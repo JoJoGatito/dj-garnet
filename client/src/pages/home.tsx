@@ -110,14 +110,14 @@ export default function Home() {
           <div className="flex gap-6">
             <Link href="/requests">
               <button 
-                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:text-primary"
+                className="text-sm text-primary-foreground hover:text-primary-foreground/80 transition-colors duration-200 focus:outline-none focus:text-primary-foreground/80"
                 data-testid="nav-requests">
                 Requests
               </button>
             </Link>
             <Link href="/">
               <button 
-                className="text-sm text-primary-foreground hover:text-primary-foreground transition-colors duration-200 focus:outline-none"
+                className="text-sm text-primary-foreground hover:text-primary-foreground/80 transition-colors duration-200 focus:outline-none"
                 data-testid="nav-home">
                 Home
               </button>
