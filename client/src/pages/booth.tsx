@@ -16,17 +16,25 @@ export default function BoothAdmin() {
 
   const updateStatusMutation = useMutation({
     mutationFn: async ({ id, status }: { id: string; status: UpdateRequestStatus["status"] }) => {
+      console.log("Updating status:", id, status);
       const response = await apiRequest("PATCH", `/api/requests/${id}/status`, { status });
-      return response.json();
+      const result = await response.json();
+      console.log("Status update response:", result);
+      return result;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/requests"] });
+    onSuccess: (data) => {
+      console.log("Status update successful, invalidating queries");
+      // Use a more aggressive invalidation and refetch strategy
+      queryClient.invalidateQueries({ queryKey: ["/api/requests"], refetchType: 'all' });
+      // Explicitly refetch the requests query to ensure fresh data
+      queryClient.refetchQueries({ queryKey: ["/api/requests"], type: 'all' });
       toast({
         title: "Status updated",
         description: "Request status has been updated successfully.",
       });
     },
-    onError: () => {
+    onError: (error) => {
+      console.error("Status update error:", error);
       toast({
         title: "Error",
         description: "Failed to update request status. Please try again.",

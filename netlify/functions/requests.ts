@@ -25,7 +25,9 @@ const handler: Handler = async (event, context) => {
 
   try {
     if (event.httpMethod === 'GET') {
+      console.log("GET request received for all requests");
       const allRequests = await db.select().from(requests).orderBy(desc(requests.requestedAt));
+      console.log("Fetched requests data:", allRequests);
       return {
         statusCode: 200,
         headers,

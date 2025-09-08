@@ -1,4 +1,5 @@
 import { useState } from "react";
+import djGarnetLogo from "../assets/images/djgarnet.webp";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -105,7 +106,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <nav className="border-b border-border px-4 py-3">
         <div className="max-w-2xl mx-auto flex items-center justify-between">
-          <img src="/src/assets/images/djgarnet.webp" alt="DJ Garnet Logo" className="h-8" />
+          <img src={djGarnetLogo} alt="DJ Garnet Logo" className="h-8" />
           <div className="flex gap-6">
             <Link href="/requests">
               <button 
@@ -129,7 +130,7 @@ export default function Home() {
         <div className="max-w-2xl mx-auto">
           <div className="space-y-8">
             <div className="text-center space-y-4">
-              <img src="/src/assets/images/djgarnet.webp" alt="DJ Garnet Logo" className="w-full max-w-md mx-auto" />
+              <img src={djGarnetLogo} alt="DJ Garnet Logo" className="w-full max-w-md mx-auto" />
               <p className="text-muted-foreground text-lg font-light">
                 Request your favorite tracks
               </p>

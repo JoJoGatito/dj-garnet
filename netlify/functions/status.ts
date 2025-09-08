@@ -33,21 +33,32 @@ const handler: Handler = async (event, context) => {
 
   try {
     const id = event.path.split("/").pop();
+    console.log("Status update request for ID:", id);
+    
     if (!event.body) {
+      console.log("Missing request body");
       return {
         statusCode: 400,
         headers,
         body: JSON.stringify({ message: "Request body is missing" })
       }
     }
-    const validatedData = updateRequestStatusSchema.parse(JSON.parse(event.body));
+    
+    const parsedBody = JSON.parse(event.body);
+    console.log("Status update body:", parsedBody);
+    
+    const validatedData = updateRequestStatusSchema.parse(parsedBody);
+    console.log("Validated status:", validatedData.status);
 
     const result = await db.update(requests)
       .set({ status: validatedData.status })
       .where(eq(requests.id, id as string))
       .returning();
+    
+    console.log("Status update DB result:", result);
 
-    if (!result) {
+    if (!result || result.length === 0) {
+      console.log("Request not found for ID:", id);
       return {
         statusCode: 404,
         headers,
@@ -55,6 +66,7 @@ const handler: Handler = async (event, context) => {
       };
     }
 
+    console.log("Successfully updated status for ID:", id, "to:", validatedData.status);
     return {
       statusCode: 200,
       headers,

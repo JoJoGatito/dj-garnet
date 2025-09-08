@@ -9,9 +9,19 @@ export default function Requests() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
+  // Add debugging logs
+  console.log("Rendering Requests page");
+
+  // Configure query to always fetch fresh data
   const { data: requests = [], isLoading } = useQuery<Request[]>({
     queryKey: ["/api/requests"],
+    staleTime: 0,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true
   });
+
+  // Debug log whenever requests data changes
+  console.log("Requests data:", requests);
 
   // No status update functionality on the regular requests page
 
