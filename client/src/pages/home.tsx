@@ -119,7 +119,7 @@ export default function Home() {
               <button 
                 className="text-sm text-primary hover:text-primary transition-colors duration-200 focus:outline-none"
                 data-testid="nav-home">
-                Request
+                Home
               </button>
             </Link>
           </div>
