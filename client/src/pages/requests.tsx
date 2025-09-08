@@ -13,30 +13,7 @@ export default function Requests() {
     queryKey: ["/api/requests"],
   });
 
-  const updateStatusMutation = useMutation({
-    mutationFn: async ({ id, status }: { id: string; status: UpdateRequestStatus["status"] }) => {
-      const response = await apiRequest("PATCH", `/api/requests/${id}/status`, { status });
-      return response.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/requests"] });
-      toast({
-        title: "Status updated",
-        description: "Request status has been updated successfully.",
-      });
-    },
-    onError: () => {
-      toast({
-        title: "Error",
-        description: "Failed to update request status. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
-
-  const handleStatusChange = (id: string, status: UpdateRequestStatus["status"]) => {
-    updateStatusMutation.mutate({ id, status });
-  };
+  // No status update functionality on the regular requests page
 
   const getStatusDisplay = (status: Request["status"]) => {
     switch (status) {
@@ -171,41 +148,7 @@ export default function Requests() {
                           Requested {getTimeAgo(request.requestedAt)}
                         </p>
                       </div>
-                      <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                        {request.status !== "played" && (
-                          <Button
-                            size="sm"
-                            variant="secondary"
-                            onClick={() => handleStatusChange(request.id, "played")}
-                            disabled={updateStatusMutation.isPending}
-                            className="px-3 py-1 text-xs bg-muted hover:bg-secondary text-muted-foreground rounded transition-colors duration-200"
-                            data-testid={`button-played-${request.id}`}>
-                            Played
-                          </Button>
-                        )}
-                        {request.status !== "coming-up" && (
-                          <Button
-                            size="sm"
-                            variant="secondary"
-                            onClick={() => handleStatusChange(request.id, "coming-up")}
-                            disabled={updateStatusMutation.isPending}
-                            className="px-3 py-1 text-xs bg-accent hover:bg-primary text-accent-foreground rounded transition-colors duration-200"
-                            data-testid={`button-coming-up-${request.id}`}>
-                            Coming Up
-                          </Button>
-                        )}
-                        {request.status !== "maybe" && (
-                          <Button
-                            size="sm"
-                            variant="secondary"
-                            onClick={() => handleStatusChange(request.id, "maybe")}
-                            disabled={updateStatusMutation.isPending}
-                            className="px-3 py-1 text-xs bg-primary hover:bg-accent text-primary-foreground rounded transition-colors duration-200"
-                            data-testid={`button-maybe-${request.id}`}>
-                            Maybe
-                          </Button>
-                        )}
-                      </div>
+                      {/* Status management buttons removed - only available in admin page */}
                     </div>
                   </div>
                 ))}

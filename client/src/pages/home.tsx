@@ -167,18 +167,18 @@ export default function Home() {
               <div className="space-y-3">
                 <div className="bg-card border border-border rounded-md p-4 text-center">
                   <p className="text-foreground font-medium mb-1">Cash App</p>
-                  <p className="text-muted-foreground text-sm">$DJGarnet</p>
+                  <p className="text-muted-foreground text-sm">$jcmuerte</p>
                 </div>
                 <div className="bg-card border border-border rounded-md p-4 text-center">
                   <p className="text-foreground font-medium mb-1">Venmo</p>
-                  <p className="text-muted-foreground text-sm">@DJGarnet</p>
+                  <p className="text-muted-foreground text-sm">@Jordan-Muerte</p>
                 </div>
               </div>
             </div>
 
             <div className="border-t border-border pt-6">
               <p className="text-muted-foreground text-sm mb-4 text-center">How am I doing?</p>
-              <p className="text-muted-foreground text-xs mb-4 text-center">Let me know what you think or how I can improve!</p>
+              <p className="text-muted-foreground text-xs mb-4 text-center">Let me know what you think or how I can improve</p>
               <form onSubmit={handleFeedbackSubmit} className="space-y-4">
                 <Textarea
                   placeholder="Share your thoughts..."
