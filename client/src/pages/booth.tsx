@@ -17,7 +17,8 @@ export default function BoothAdmin() {
   const updateStatusMutation = useMutation({
     mutationFn: async ({ id, status }: { id: string; status: UpdateRequestStatus["status"] }) => {
       console.log("Updating status:", id, status);
-      const response = await apiRequest("PATCH", `/api/requests/${id}/status`, { status });
+      // Pass ID as a query parameter to ensure it's accessible in the Netlify function
+      const response = await apiRequest("PATCH", `/api/requests/${id}/status?id=${id}`, { status });
       const result = await response.json();
       console.log("Status update response:", result);
       return result;

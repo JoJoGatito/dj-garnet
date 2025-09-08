@@ -32,8 +32,19 @@ const handler: Handler = async (event, context) => {
   }
 
   try {
-    const id = event.path.split("/").pop();
-    console.log("Status update request for ID:", id);
+    console.log("Full event object:", JSON.stringify({
+      path: event.path,
+      httpMethod: event.httpMethod,
+      headers: event.headers,
+      queryStringParameters: event.queryStringParameters,
+      body: event.body ? "present" : "missing"
+    }, null, 2));
+    
+    // Extract the ID from the path
+    // Expected format: /.netlify/functions/status/[id]
+    const pathParts = event.path.split('/');
+    const id = event.queryStringParameters?.id || pathParts[pathParts.length - 1];
+    console.log("Status update request for ID:", id, "Path parts:", pathParts);
     
     if (!event.body) {
       console.log("Missing request body");
@@ -50,19 +61,36 @@ const handler: Handler = async (event, context) => {
     const validatedData = updateRequestStatusSchema.parse(parsedBody);
     console.log("Validated status:", validatedData.status);
 
-    const result = await db.update(requests)
-      .set({ status: validatedData.status })
-      .where(eq(requests.id, id as string))
-      .returning();
+    // Log before DB operation
+    console.log("Attempting DB update with: ", {
+      id: id,
+      idType: typeof id,
+      status: validatedData.status
+    });
     
-    console.log("Status update DB result:", result);
-
-    if (!result || result.length === 0) {
-      console.log("Request not found for ID:", id);
+    let result;
+    try {
+      result = await db.update(requests)
+        .set({ status: validatedData.status })
+        .where(eq(requests.id, id as string))
+        .returning();
+      
+      console.log("Status update DB result:", result);
+  
+      if (!result || result.length === 0) {
+        console.log("Request not found for ID:", id);
+        return {
+          statusCode: 404,
+          headers,
+          body: JSON.stringify({ message: "Request not found" })
+        };
+      }
+    } catch (dbError) {
+      console.error("Database error:", dbError);
       return {
-        statusCode: 404,
+        statusCode: 500,
         headers,
-        body: JSON.stringify({ message: "Request not found" })
+        body: JSON.stringify({ message: "Database operation failed", error: String(dbError) })
       };
     }
 
