@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import { PaymentAppLink } from "@/components/payment-app-link";
 import type { Request, InsertRequest, InsertFeedback } from "@shared/schema";
 
 export default function Home() {
@@ -104,7 +105,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <nav className="border-b border-border px-4 py-3">
         <div className="max-w-2xl mx-auto flex items-center justify-between">
-          <h1 className="text-lg font-medium text-foreground">DJ Garnet</h1>
+          <img src="/src/assets/images/djgarnet.webp" alt="DJ Garnet Logo" className="h-8" />
           <div className="flex gap-6">
             <Link href="/requests">
               <button 
@@ -128,9 +129,7 @@ export default function Home() {
         <div className="max-w-2xl mx-auto">
           <div className="space-y-8">
             <div className="text-center space-y-4">
-              <h2 className="text-4xl md:text-6xl font-light tracking-tight text-foreground">
-                DJ Garnet
-              </h2>
+              <img src="/src/assets/images/djgarnet.webp" alt="DJ Garnet Logo" className="w-full max-w-md mx-auto" />
               <p className="text-muted-foreground text-lg font-light">
                 Request your favorite tracks
               </p>
@@ -165,14 +164,29 @@ export default function Home() {
             <div className="border-t border-border pt-6">
               <p className="text-muted-foreground text-sm mb-4 text-center">Support DJ Garnet</p>
               <div className="space-y-3">
-                <div className="bg-card border border-border rounded-md p-4 text-center">
-                  <p className="text-foreground font-medium mb-1">Cash App</p>
-                  <p className="text-muted-foreground text-sm">$jcmuerte</p>
-                </div>
-                <div className="bg-card border border-border rounded-md p-4 text-center">
-                  <p className="text-foreground font-medium mb-1">Venmo</p>
-                  <p className="text-muted-foreground text-sm">@Jordan-Muerte</p>
-                </div>
+                <PaymentAppLink
+                  appType="cashapp"
+                  username="jcmuerte"
+                  amount={5}
+                  className="bg-card border-border rounded-md p-4 justify-center">
+                  <div className="text-center">
+                    <p className="text-foreground font-medium mb-1">Cash App</p>
+                    <p className="text-muted-foreground text-sm">$jcmuerte</p>
+                    <p className="text-muted-foreground text-xs mt-1">Tap to open Cash App</p>
+                  </div>
+                </PaymentAppLink>
+                <PaymentAppLink
+                  appType="venmo"
+                  username="Jordan-Muerte"
+                  amount={5}
+                  note="DJ Garnet Tip"
+                  className="bg-card border-border rounded-md p-4 justify-center">
+                  <div className="text-center">
+                    <p className="text-foreground font-medium mb-1">Venmo</p>
+                    <p className="text-muted-foreground text-sm">@Jordan-Muerte</p>
+                    <p className="text-muted-foreground text-xs mt-1">Tap to open Venmo</p>
+                  </div>
+                </PaymentAppLink>
               </div>
             </div>
 
