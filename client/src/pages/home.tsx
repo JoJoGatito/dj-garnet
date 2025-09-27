@@ -109,14 +109,20 @@ export default function Home() {
           <img src={djGarnetLogo} alt="DJ Garnet Logo" className="h-8" />
           <div className="flex gap-6">
             <Link href="/requests">
-              <button 
+              <button
                 className="text-sm text-primary-foreground hover:text-primary-foreground/80 transition-colors duration-200 focus:outline-none focus:text-primary-foreground/80"
                 data-testid="nav-requests">
                 Requests
               </button>
             </Link>
+            <Link href="/chat">
+              <button
+                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none">
+                Chat
+              </button>
+            </Link>
             <Link href="/">
-              <button 
+              <button
                 className="text-sm text-primary-foreground hover:text-primary-foreground/80 transition-colors duration-200 focus:outline-none"
                 data-testid="nav-home">
                 Home

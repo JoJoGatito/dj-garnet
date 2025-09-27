@@ -79,6 +79,11 @@ export default function Requests() {
                   Requests
                 </button>
               </Link>
+              <Link href="/chat">
+                <button className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none">
+                  Chat
+                </button>
+              </Link>
               <Link href="/">
                 <button className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:text-primary">
                   Request
@@ -105,14 +110,20 @@ export default function Requests() {
           <h1 className="text-lg font-medium text-foreground">DJ Garnet</h1>
           <div className="flex gap-6">
             <Link href="/requests">
-              <button 
+              <button
                 className="text-sm text-primary hover:text-primary transition-colors duration-200 focus:outline-none"
                 data-testid="nav-requests">
                 Requests
               </button>
             </Link>
+            <Link href="/chat">
+              <button
+                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none">
+                Chat
+              </button>
+            </Link>
             <Link href="/">
-              <button 
+              <button
                 className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:text-primary"
                 data-testid="nav-home">
                 Request

@@ -7,6 +7,7 @@ import Home from "@/pages/home";
 import Requests from "@/pages/requests";
 import NotFound from "@/pages/not-found";
 import BoothAdmin from "@/pages/booth";
+import Chat from "@/pages/chat";
 
 function Router() {
   return (
@@ -14,6 +15,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/requests" component={Requests} />
       <Route path="/booth" component={BoothAdmin} />
+      <Route path="/chat" component={Chat} />
       <Route component={NotFound} />
     </Switch>
   );

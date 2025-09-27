@@ -134,6 +134,11 @@ export default function BoothAdmin() {
                   Requests
                 </button>
               </Link>
+              <Link href="/chat">
+                <button className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none">
+                  Chat
+                </button>
+              </Link>
               <Link href="/">
                 <button className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:text-primary">
                   Request
@@ -160,19 +165,25 @@ export default function BoothAdmin() {
           <h1 className="text-lg font-medium text-foreground">DJ Booth</h1>
           <div className="flex gap-6">
             <Link href="/booth">
-              <button 
+              <button
                 className="text-sm text-primary hover:text-primary transition-colors duration-200 focus:outline-none">
                 Admin
               </button>
             </Link>
             <Link href="/requests">
-              <button 
+              <button
                 className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none">
                 Requests
               </button>
             </Link>
+            <Link href="/chat">
+              <button
+                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none">
+                Chat
+              </button>
+            </Link>
             <Link href="/">
-              <button 
+              <button
                 className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:text-primary">
                 Request
               </button>
