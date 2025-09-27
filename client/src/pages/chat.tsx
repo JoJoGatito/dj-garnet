@@ -1,25 +1,23 @@
 import { Link } from "wouter";
+import djGarnetLogo from "../assets/images/djgarnet.webp";
 
 export default function Chat() {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <nav className="border-b border-border px-4 py-3">
         <div className="max-w-2xl mx-auto flex items-center justify-between">
-          <h1 className="text-lg font-medium text-foreground">DJ Garnet</h1>
+          <Link href="/">
+            <img src={djGarnetLogo} alt="DJ Garnet Logo" className="h-8" />
+          </Link>
           <div className="flex gap-6">
             <Link href="/">
               <button className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:text-primary">
-                Request
+                Home
               </button>
             </Link>
             <Link href="/requests">
               <button className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none">
                 Requests
-              </button>
-            </Link>
-            <Link href="/booth">
-              <button className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none">
-                Admin
               </button>
             </Link>
             <Link href="/chat">

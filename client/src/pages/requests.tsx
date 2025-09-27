@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import type { Request, UpdateRequestStatus } from "@shared/schema";
+import djGarnetLogo from "../assets/images/djgarnet.webp";
 
 export default function Requests() {
   const { toast } = useToast();
@@ -72,7 +73,9 @@ export default function Requests() {
       <div className="min-h-screen flex flex-col bg-background text-foreground">
         <nav className="border-b border-border px-4 py-3">
           <div className="max-w-2xl mx-auto flex items-center justify-between">
-            <h1 className="text-lg font-medium text-foreground">DJ Garnet</h1>
+            <Link href="/">
+              <img src={djGarnetLogo} alt="DJ Garnet Logo" className="h-8" />
+            </Link>
             <div className="flex gap-6">
               <Link href="/requests">
                 <button className="text-sm text-primary hover:text-primary transition-colors duration-200 focus:outline-none">
@@ -86,7 +89,7 @@ export default function Requests() {
               </Link>
               <Link href="/">
                 <button className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:text-primary">
-                  Request
+                  Home
                 </button>
               </Link>
             </div>
@@ -107,7 +110,9 @@ export default function Requests() {
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <nav className="border-b border-border px-4 py-3">
         <div className="max-w-2xl mx-auto flex items-center justify-between">
-          <h1 className="text-lg font-medium text-foreground">DJ Garnet</h1>
+          <Link href="/">
+            <img src={djGarnetLogo} alt="DJ Garnet Logo" className="h-8" />
+          </Link>
           <div className="flex gap-6">
             <Link href="/requests">
               <button
@@ -126,7 +131,7 @@ export default function Requests() {
               <button
                 className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:text-primary"
                 data-testid="nav-home">
-                Request
+                Home
               </button>
             </Link>
           </div>
