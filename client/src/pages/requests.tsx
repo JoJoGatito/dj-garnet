@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import type { Request, UpdateRequestStatus } from "@shared/schema";
 import djGarnetLogo from "../assets/images/djgarnet.webp";
+import BottomNav from "@/components/bottom-nav";
 
 export default function Requests() {
   const { toast } = useToast();
@@ -71,74 +72,21 @@ export default function Requests() {
   if (isLoading) {
     return (
       <div className="min-h-screen flex flex-col bg-background text-foreground">
-        <nav className="border-b border-border px-4 py-3">
-          <div className="max-w-2xl mx-auto flex items-center justify-between">
-            <Link href="/">
-              <img src={djGarnetLogo} alt="DJ Garnet Logo" className="h-8" />
-            </Link>
-            <div className="flex gap-6">
-              <Link href="/requests">
-                <button className="text-sm text-primary hover:text-primary transition-colors duration-200 focus:outline-none">
-                  Requests
-                </button>
-              </Link>
-              <Link href="/chat">
-                <button className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none">
-                  Chat
-                </button>
-              </Link>
-              <Link href="/">
-                <button className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:text-primary">
-                  Home
-                </button>
-              </Link>
-            </div>
-          </div>
-        </nav>
-        <main className="flex-1 px-4 py-8">
+        <main className="flex-1 px-4 py-8 pb-24">
           <div className="max-w-2xl mx-auto">
             <div className="text-center py-8">
               <p className="text-muted-foreground">Loading requests...</p>
             </div>
           </div>
         </main>
+        <BottomNav />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <nav className="border-b border-border px-4 py-3">
-        <div className="max-w-2xl mx-auto flex items-center justify-between">
-          <Link href="/">
-            <img src={djGarnetLogo} alt="DJ Garnet Logo" className="h-8" />
-          </Link>
-          <div className="flex gap-6">
-            <Link href="/requests">
-              <button
-                className="text-sm text-primary hover:text-primary transition-colors duration-200 focus:outline-none"
-                data-testid="nav-requests">
-                Requests
-              </button>
-            </Link>
-            <Link href="/chat">
-              <button
-                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none">
-                Chat
-              </button>
-            </Link>
-            <Link href="/">
-              <button
-                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:text-primary"
-                data-testid="nav-home">
-                Home
-              </button>
-            </Link>
-          </div>
-        </div>
-      </nav>
-
-      <main className="flex-1 px-4 py-8">
+      <main className="flex-1 px-4 py-8 pb-24">
         <div className="max-w-2xl mx-auto">
           <div className="space-y-6">
             <div className="flex items-center justify-between">
@@ -183,6 +131,7 @@ export default function Requests() {
           </div>
         </div>
       </main>
+      <BottomNav />
     </div>
   );
 }

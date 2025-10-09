@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { PaymentAppLink } from "@/components/payment-app-link";
+import BottomNav from "@/components/bottom-nav";
 import type { Request, InsertRequest, InsertFeedback } from "@shared/schema";
 
 export default function Home() {
@@ -104,35 +105,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <nav className="border-b border-border px-4 py-3">
-        <div className="max-w-2xl mx-auto flex items-center justify-between">
-          <img src={djGarnetLogo} alt="DJ Garnet Logo" className="h-8" />
-          <div className="flex gap-6">
-            <Link href="/requests">
-              <button
-                className="text-sm text-primary-foreground hover:text-primary-foreground/80 transition-colors duration-200 focus:outline-none focus:text-primary-foreground/80"
-                data-testid="nav-requests">
-                Requests
-              </button>
-            </Link>
-            <Link href="/chat">
-              <button
-                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus:outline-none">
-                Chat
-              </button>
-            </Link>
-            <Link href="/">
-              <button
-                className="text-sm text-primary-foreground hover:text-primary-foreground/80 transition-colors duration-200 focus:outline-none"
-                data-testid="nav-home">
-                Home
-              </button>
-            </Link>
-          </div>
-        </div>
-      </nav>
-
-      <main className="flex-1 px-4 py-8">
+      <main className="flex-1 px-4 py-8 pb-24">
         <div className="max-w-2xl mx-auto">
           <div className="space-y-8">
             <div className="text-center space-y-4">
@@ -220,6 +193,7 @@ export default function Home() {
           </div>
         </div>
       </main>
+      <BottomNav />
     </div>
   );
 }
