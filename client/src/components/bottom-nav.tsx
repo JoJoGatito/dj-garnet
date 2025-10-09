@@ -19,7 +19,7 @@ const BottomNav = () => {
   return (
     <nav className={cn(
       "fixed bottom-0 left-0 right-0",
-      "hidden md:hidden", // Only visible on mobile
+      "flex md:hidden", // Only visible on mobile
       "z-40",
       "border-t border-border",
       "bg-background",

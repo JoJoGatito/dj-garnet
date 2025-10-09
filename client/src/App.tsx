@@ -8,6 +8,7 @@ import Requests from "@/pages/requests";
 import NotFound from "@/pages/not-found";
 import BoothAdmin from "@/pages/booth";
 import Chat from "@/pages/chat";
+import BottomNav from "@/components/bottom-nav";
 
 function Router() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <Router />
+        <BottomNav />
       </TooltipProvider>
     </QueryClientProvider>
   );
