@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const BottomNav = () => {
   const [location] = useLocation();
@@ -12,7 +13,7 @@ const BottomNav = () => {
 
   const navItems = [
     { href: "/", label: "Home" },
-    { href: "/requests", label: "Requests" },
+    { href: "/playlist", label: "Playlist" },
     { href: "/chat", label: "Chat" },
   ];
 
@@ -46,6 +47,8 @@ const BottomNav = () => {
             </Link>
           );
         })}
+        <div className="w-px h-6 bg-border mx-1" />
+        <ThemeToggle />
       </div>
     </nav>
   );

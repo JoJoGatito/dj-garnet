@@ -74,7 +74,7 @@ For **complete functionality** (song requests + feedback storage):
 ## Usage
 
 1. **For Audience**: Visit the main page and submit song requests
-2. **For DJs**: Go to `/requests` to manage and tag requests
+2. **For DJs**: Go to `/playlist` to view the playlist and `/booth` to manage requests
 
 ## License
 

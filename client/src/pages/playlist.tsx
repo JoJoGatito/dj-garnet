@@ -7,12 +7,12 @@ import type { Request, UpdateRequestStatus } from "@shared/schema";
 import djGarnetLogo from "../assets/images/djgarnet.webp";
 import BottomNav from "@/components/bottom-nav";
 
-export default function Requests() {
+export default function Playlist() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
   // Add debugging logs
-  console.log("Rendering Requests page");
+  console.log("Rendering Playlist page");
 
   // Configure query to always fetch fresh data
   const { data: requests = [], isLoading } = useQuery<Request[]>({
@@ -90,17 +90,17 @@ export default function Requests() {
         <div className="max-w-2xl mx-auto">
           <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-medium text-foreground">Song Requests</h2>
+              <h2 className="text-2xl font-medium text-foreground">Playlist</h2>
               <span className="text-muted-foreground text-sm" data-testid="text-request-count">
-                {requests.length} requests
+                {requests.length} songs
               </span>
             </div>
 
             {requests.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-muted-foreground text-lg">No requests yet</p>
+                <p className="text-muted-foreground text-lg">No songs yet</p>
                 <p className="text-muted-foreground text-sm mt-2">
-                  Song requests will appear here as they come in.
+                  Songs will appear here as they are requested.
                 </p>
               </div>
             ) : (
@@ -114,7 +114,7 @@ export default function Requests() {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-3">
                           <span className="text-foreground font-medium" data-testid={`text-song-${request.id}`}>
-                            {request.artist} - {request.title}
+                            {request.artist ? `${request.artist} - ${request.title}` : request.title}
                           </span>
                           {getStatusDisplay(request.status)}
                         </div>

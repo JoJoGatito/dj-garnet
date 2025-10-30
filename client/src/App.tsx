@@ -3,8 +3,9 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ThemeProvider } from "@/components/theme-provider";
 import Home from "@/pages/home";
-import Requests from "@/pages/requests";
+import Playlist from "@/pages/playlist";
 import NotFound from "@/pages/not-found";
 import BoothAdmin from "@/pages/booth";
 import Chat from "@/pages/chat";
@@ -14,7 +15,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/requests" component={Requests} />
+      <Route path="/playlist" component={Playlist} />
       <Route path="/booth" component={BoothAdmin} />
       <Route path="/chat" component={Chat} />
       <Route component={NotFound} />
@@ -25,11 +26,13 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Router />
-        <BottomNav />
-      </TooltipProvider>
+      <ThemeProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Router />
+          <BottomNav />
+        </TooltipProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

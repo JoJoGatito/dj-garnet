@@ -13,36 +13,6 @@ export default function BoothAdmin() {
     queryKey: ["/api/requests"],
   });
 
-  const updateStatusMutation = useMutation({
-    mutationFn: async ({ id, status }: { id: string; status: UpdateRequestStatus["status"] }) => {
-      console.log("Updating status:", id, status);
-      // Pass ID as a query parameter to ensure it's accessible in the Netlify function
-      const response = await apiRequest("PATCH", `/api/requests/${id}/status?id=${id}`, { status });
-      const result = await response.json();
-      console.log("Status update response:", result);
-      return result;
-    },
-    onSuccess: (data) => {
-      console.log("Status update successful, invalidating queries");
-      // Use a more aggressive invalidation and refetch strategy
-      queryClient.invalidateQueries({ queryKey: ["/api/requests"], refetchType: 'all' });
-      // Explicitly refetch the requests query to ensure fresh data
-      queryClient.refetchQueries({ queryKey: ["/api/requests"], type: 'all' });
-      toast({
-        title: "Status updated",
-        description: "Request status has been updated successfully.",
-      });
-    },
-    onError: (error) => {
-      console.error("Status update error:", error);
-      toast({
-        title: "Error",
-        description: "Failed to update request status. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
-
   const deleteRequestMutation = useMutation({
     mutationFn: async (id: string) => {
       const response = await apiRequest("DELETE", `/api/requests/${id}`);
@@ -64,44 +34,12 @@ export default function BoothAdmin() {
     },
   });
 
-  const handleStatusChange = (id: string, status: UpdateRequestStatus["status"]) => {
-    updateStatusMutation.mutate({ id, status });
-  };
-
   const handleDeleteRequest = (id: string) => {
     if (confirm("Are you sure you want to delete this request?")) {
       deleteRequestMutation.mutate(id);
     }
   };
 
-  const getStatusDisplay = (status: Request["status"]) => {
-    switch (status) {
-      case "played":
-        return (
-          <span className="status-played px-2 py-1 rounded text-xs font-medium">
-            Played
-          </span>
-        );
-      case "coming-up":
-        return (
-          <span className="status-coming-up px-2 py-1 rounded text-xs font-medium">
-            Coming Up
-          </span>
-        );
-      case "maybe":
-        return (
-          <span className="status-maybe px-2 py-1 rounded text-xs font-medium">
-            Maybe
-          </span>
-        );
-      default:
-        return (
-          <span className="px-2 py-1 rounded text-xs font-medium text-muted-foreground">
-            New
-          </span>
-        );
-    }
-  };
 
   const getTimeAgo = (date: Date) => {
     const now = new Date();
@@ -161,56 +99,24 @@ export default function BoothAdmin() {
                     className="group bg-card border border-border rounded-md p-4 hover:border-primary/20 transition-colors duration-200">
                     <div className="flex items-center justify-between">
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-3">
+                        <div>
                           <span className="text-foreground font-medium">
-                            {request.artist} - {request.title}
+                            {request.artist ? `${request.artist} - ${request.title}` : request.title}
                           </span>
-                          {getStatusDisplay(request.status)}
                         </div>
                         <p className="text-muted-foreground text-sm mt-1">
                           Requested {getTimeAgo(request.requestedAt)}
                         </p>
                       </div>
-                      <div className="flex gap-2">
-                        <Button
-                          size="sm"
-                          variant="destructive"
-                          onClick={() => handleDeleteRequest(request.id)}
-                          disabled={deleteRequestMutation.isPending}
-                          className="px-3 py-1 text-xs rounded transition-colors duration-200"
-                        >
-                          Delete
-                        </Button>
-                        <div className="space-x-1">
-                          <Button
-                            size="sm"
-                            variant={request.status === "played" ? "default" : "outline"}
-                            onClick={() => handleStatusChange(request.id, "played")}
-                            disabled={updateStatusMutation.isPending}
-                            className="px-3 py-1 text-xs rounded transition-colors duration-200"
-                          >
-                            Played
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant={request.status === "coming-up" ? "default" : "outline"}
-                            onClick={() => handleStatusChange(request.id, "coming-up")}
-                            disabled={updateStatusMutation.isPending}
-                            className="px-3 py-1 text-xs rounded transition-colors duration-200"
-                          >
-                            Coming Up
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant={request.status === "maybe" ? "default" : "outline"}
-                            onClick={() => handleStatusChange(request.id, "maybe")}
-                            disabled={updateStatusMutation.isPending}
-                            className="px-3 py-1 text-xs rounded transition-colors duration-200"
-                          >
-                            Maybe
-                          </Button>
-                        </div>
-                      </div>
+                      <Button
+                        size="sm"
+                        variant="destructive"
+                        onClick={() => handleDeleteRequest(request.id)}
+                        disabled={deleteRequestMutation.isPending}
+                        className="px-3 py-1 text-xs rounded transition-colors duration-200"
+                      >
+                        Delete
+                      </Button>
                     </div>
                   </div>
                 ))}

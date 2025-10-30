@@ -70,21 +70,7 @@ export default function Home() {
     const input = songInput.trim();
     if (!input) return;
 
-    // Try to parse "Artist - Song" format
-    const parts = input.split(" - ");
-    let artist: string;
-    let title: string;
-
-    if (parts.length >= 2) {
-      artist = parts[0].trim();
-      title = parts.slice(1).join(" - ").trim();
-    } else {
-      // If no " - " separator, treat whole input as title
-      artist = "Unknown Artist";
-      title = input;
-    }
-
-    createRequestMutation.mutate({ artist, title });
+    createRequestMutation.mutate({ artist: "", title: input });
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -123,7 +109,7 @@ export default function Home() {
                 <Input
                   id="song-request"
                   type="text"
-                  placeholder="SONG NAME - ARTIST"
+                  placeholder="Enter your song request"
                   value={songInput}
                   onChange={(e) => setSongInput(e.target.value)}
                   onKeyPress={handleKeyPress}
@@ -189,6 +175,21 @@ export default function Home() {
                   {createFeedbackMutation.isPending ? "Submitting..." : "Send Feedback"}
                 </Button>
               </form>
+            </div>
+
+            <div className="border-t border-border pt-6">
+              <p className="text-muted-foreground text-sm mb-4 text-center">Join the Community</p>
+              <a
+                href="https://discord.gg/fsQ9RUeKSA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full">
+                <Button
+                  type="button"
+                  className="w-full bg-[#5865F2] hover:bg-[#4752C4] text-white font-medium py-3 px-4 rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background">
+                  Join Ethos Discord
+                </Button>
+              </a>
             </div>
           </div>
         </div>
