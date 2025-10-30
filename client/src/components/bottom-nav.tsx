@@ -14,7 +14,7 @@ const BottomNav = () => {
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/playlist", label: "Playlist" },
-    { href: "/chat", label: "Chat" },
+    { href: "/chat", label: "Guestbook" },
   ];
 
   return (

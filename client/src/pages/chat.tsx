@@ -7,7 +7,8 @@ export default function Chat() {
       <main className="flex-1 px-4 py-8 pb-24">
         <div className="max-w-2xl mx-auto">
           <div className="space-y-6">
-            <h2 className="text-2xl font-medium text-foreground">Live Chat</h2>
+            <h2 className="text-2xl font-medium text-foreground">Guestbook</h2>
+            <p className="text-muted-foreground">Leave a note and let me know you stopped by!</p>
             
             <div className="w-full rounded-md overflow-hidden border border-border">
               <iframe
@@ -20,7 +21,7 @@ export default function Chat() {
                 marginHeight={0}
                 marginWidth={0}
                 scrolling="auto"
-                title="Live Chat"
+                title="Guestbook"
               ></iframe>
             </div>
           </div>
