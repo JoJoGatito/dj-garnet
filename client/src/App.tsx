@@ -10,6 +10,8 @@ import NotFound from "@/pages/not-found";
 import BoothAdmin from "@/pages/booth";
 import Chat from "@/pages/chat";
 import BottomNav from "@/components/bottom-nav";
+import Navbar from "@/components/navbar";
+import ScrollProgress from "@/components/scroll-progress";
 
 function Router() {
   return (
@@ -28,7 +30,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <TooltipProvider>
+          <ScrollProgress />
           <Toaster />
+          <Navbar />
           <Router />
           <BottomNav />
         </TooltipProvider>
