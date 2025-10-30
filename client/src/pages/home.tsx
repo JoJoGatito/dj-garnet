@@ -1,5 +1,6 @@
 import { useState } from "react";
 import djGarnetLogo from "../assets/images/djgarnet.webp";
+import ethosLogo from "../assets/images/ethos_logo.png";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -128,6 +129,24 @@ export default function Home() {
             </form>
 
             <div className="border-t border-border pt-6">
+              <p className="text-muted-foreground text-sm mb-4 text-center">Join the Community</p>
+              <div className="flex justify-center mb-4">
+                <img src={ethosLogo} alt="Ethos Logo" className="w-32 h-auto" />
+              </div>
+              <a
+                href="https://discord.gg/fsQ9RUeKSA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full">
+                <Button
+                  type="button"
+                  className="w-full bg-[#5865F2] hover:bg-[#4752C4] text-white font-medium py-3 px-4 rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background">
+                  Join Ethos Discord
+                </Button>
+              </a>
+            </div>
+
+            <div className="border-t border-border pt-6">
               <p className="text-muted-foreground text-sm mb-4 text-center">Support DJ Garnet</p>
               <div className="space-y-3">
                 <PaymentAppLink
@@ -177,20 +196,6 @@ export default function Home() {
               </form>
             </div>
 
-            <div className="border-t border-border pt-6">
-              <p className="text-muted-foreground text-sm mb-4 text-center">Join the Community</p>
-              <a
-                href="https://discord.gg/fsQ9RUeKSA"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full">
-                <Button
-                  type="button"
-                  className="w-full bg-[#5865F2] hover:bg-[#4752C4] text-white font-medium py-3 px-4 rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background">
-                  Join Ethos Discord
-                </Button>
-              </a>
-            </div>
           </div>
         </div>
       </main>
