@@ -13,7 +13,7 @@ export function ThemeToggle() {
     <button
       onClick={toggleTheme}
       className={cn(
-        "p-2 rounded-full",
+        "relative p-2 rounded-full",
         "transition-colors duration-200",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         "text-muted-foreground hover:text-foreground hover:bg-muted/60"
