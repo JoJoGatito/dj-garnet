@@ -11,7 +11,7 @@ const db = drizzle(sql);
 const handler: Handler = async (event, context) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
   };
 
@@ -47,6 +47,13 @@ const handler: Handler = async (event, context) => {
         statusCode: 201,
         headers,
         body: JSON.stringify(request),
+      };
+    } else if (event.httpMethod === 'DELETE') {
+      const result = await db.delete(requests).returning();
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ deleted: result.length }),
       };
     } else {
       return {

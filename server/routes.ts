@@ -31,7 +31,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
     }
   });
-
+  
+  // Delete all requests
+  app.delete("/api/requests", async (_req, res) => {
+    try {
+      const deletedCount = await storage.deleteAllRequests();
+      res.json({ deleted: deletedCount });
+    } catch (error) {
+      console.error("Error deleting all requests:", error);
+      res.status(500).json({ message: "Failed to delete all requests" });
+    }
+  });
+  
   // Update request status
   app.patch("/api/requests/:id/status", async (req, res) => {
     try {

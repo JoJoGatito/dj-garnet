@@ -14,6 +14,7 @@ export interface IStorage {
   createRequest(request: InsertRequest): Promise<Request>;
   updateRequestStatus(id: string, status: UpdateRequestStatus): Promise<Request | undefined>;
   getRequest(id: string): Promise<Request | undefined>;
+  deleteAllRequests(): Promise<number>;
   
   // Feedback methods
   createFeedback(feedbackData: InsertFeedback): Promise<Feedback>;
@@ -76,6 +77,12 @@ export class MemStorage implements IStorage {
     return this.requests.get(id);
   }
 
+  async deleteAllRequests(): Promise<number> {
+    const count = this.requests.size;
+    this.requests.clear();
+    return count;
+  }
+
   async createFeedback(feedbackData: InsertFeedback): Promise<Feedback> {
     const id = randomUUID();
     const feedbackEntry: Feedback = {
@@ -131,6 +138,11 @@ export class DbStorage implements IStorage {
   async getRequest(id: string): Promise<Request | undefined> {
     const result = await this.db.select().from(requests).where(eq(requests.id, id)).limit(1);
     return result[0];
+  }
+
+  async deleteAllRequests(): Promise<number> {
+    const result = await this.db.delete(requests).returning();
+    return result.length;
   }
 
   async createFeedback(feedbackData: InsertFeedback): Promise<Feedback> {

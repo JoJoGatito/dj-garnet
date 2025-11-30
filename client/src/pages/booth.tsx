@@ -40,6 +40,33 @@ export default function BoothAdmin() {
     }
   };
 
+  const deleteAllMutation = useMutation({
+    mutationFn: async () => {
+      const response = await apiRequest("DELETE", `/api/requests`);
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/requests"] });
+      toast({
+        title: "All requests deleted",
+        description: "All song requests have been removed.",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to delete all requests. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleDeleteAll = () => {
+    if (confirm("Are you sure you want to delete all requests? This cannot be undone.")) {
+      deleteAllMutation.mutate();
+    }
+  };
+
 
   const getTimeAgo = (date: Date) => {
     const now = new Date();
@@ -79,9 +106,22 @@ export default function BoothAdmin() {
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-medium text-foreground">Admin Panel</h2>
-              <span className="text-muted-foreground text-sm">
-                {requests.length} requests
-              </span>
+              <div className="flex items-center gap-3">
+                <span className="text-muted-foreground text-sm">
+                  {requests.length} requests
+                </span>
+                {requests.length > 0 && (
+                  <Button
+                    size="sm"
+                    variant="destructive"
+                    onClick={handleDeleteAll}
+                    disabled={deleteAllMutation.isPending}
+                    className="px-3 py-1 text-xs rounded transition-colors duration-200"
+                  >
+                    Delete all
+                  </Button>
+                )}
+              </div>
             </div>
 
             {requests.length === 0 ? (
